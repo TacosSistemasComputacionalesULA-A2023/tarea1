@@ -8,7 +8,9 @@ if __name__ == '__main__':
     num_iterations = 100 if len(sys.argv) < 2 else int(sys.argv[1])
     version = 'v0' if len(sys.argv) < 3 else sys.argv[2]
     methodIDs = ['random', 'greedy', 'epsilon-greedy']
+    #Indicates the trust level for the actions
     alpha = 0.1
+    #Sets a threshold for how willing is the agent to explore
     epsilon = 0.1
     env = gym.make(f'TwoArmedBandit-{version}')
 
@@ -22,7 +24,6 @@ if __name__ == '__main__':
                     action = agent.get_action(methodID)    
                     _, reward, _, _, _ = env.step(action)
                     agent.update(action, reward)
-                    # agent.render()
                     totalReward += reward
                 print(f'Steps: 100 | Alpha: {alpha:<.1f} | Epsilon:{epsilon::<.1f} | Action: {methodID} | Reward:{totalReward}')
         env.close()
