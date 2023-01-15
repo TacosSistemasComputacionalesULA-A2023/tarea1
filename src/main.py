@@ -13,9 +13,8 @@ if __name__ == '__main__':
     env = gym.make(f'TwoArmedBandit-{version}')
     agent = TwoArmedBandit(alpha) 
 
-    env.reset(options={'delay': 1})
-
     for methodID in methodIDs:
+        env.reset(options={'delay': 1})
         for epsilon in np.arange(0.1, 1.1, 0.1):
             for alpha in np.arange(0.1, 1.1, 0.1):
                 totalReward = 0
@@ -25,5 +24,5 @@ if __name__ == '__main__':
                     agent.update(action, reward)
                     # agent.render()
                     totalReward += reward
-                print(f'Alpha: {alpha:<.1f}|Epsilon:{epsilon::<.1f}|Action: {methodID}|Reward:{totalReward}')
-    env.close()
+                print(f'Steps: 100|Alpha: {alpha:<.1f}|Epsilon:{epsilon::<.1f}|Action: {methodID}|Reward:{totalReward}')
+        env.close()
