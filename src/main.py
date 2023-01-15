@@ -26,4 +26,5 @@ if __name__ == '__main__':
                     agent.update(action, reward)
                     totalReward += reward
                 print(f'Steps: 100 | Alpha: {alpha:<.1f} | Epsilon:{epsilon::<.1f} | Action: {methodID} | Reward:{totalReward}')
+        print('\n')
         env.close()
