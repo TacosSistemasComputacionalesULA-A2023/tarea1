@@ -1,9 +1,10 @@
 import numpy as np
 
 class TwoArmedBandit():
-    def __init__(self, alpha=1):
+    def __init__(self, alpha=1, epsilon=1):
         self.arms = 2
         self.alpha = alpha
+        self.epsilon = epsilon
         self.reset()
 
     def reset(self):
@@ -25,7 +26,7 @@ class TwoArmedBandit():
             return np.argmax(self.values)
         elif mode == 'epsilon-greedy':
             p = np.random.random()
-            return np.random.choice(self.arms) if p < self.arms else np.argmax(self.values)
+            return np.random.choice(self.arms) if p < self.epsilon else np.argmax(self.values)
 
     def render(self):
         print('Iteration: {}, Action: {}, Reward: {}, Values: {}'.format(
