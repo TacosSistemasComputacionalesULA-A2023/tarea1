@@ -2,6 +2,7 @@ import sys
 import gym_environments
 import gym
 import numpy as np
+import csv
 from agent import TwoArmedBandit
 
 if __name__ == '__main__':
@@ -13,6 +14,7 @@ if __name__ == '__main__':
     #Sets a threshold for how willing is the agent to explore
     epsilon = 0.1
     env = gym.make(f'TwoArmedBandit-{version}')
+    data = []
 
     for methodID in methodIDs:
         env.reset(options={'delay': 1})
@@ -25,6 +27,10 @@ if __name__ == '__main__':
                     _, reward, _, _, _ = env.step(action)
                     agent.update(action, reward)
                     totalReward += reward
+                data.append([100, alpha, epsilon, methodID, totalReward])                
                 print(f'Steps: 100 | Alpha: {alpha:<.1f} | Epsilon:{epsilon::<.1f} | Action: {methodID} | Reward:{totalReward}')
         print('\n')
+        with open(f'output-{methodID}.csv', 'w') as file:
+            writer = csv.writer(file, dialect='excel')
+            writer.writerows(data)  
         env.close()
