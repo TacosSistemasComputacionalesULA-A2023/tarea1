@@ -2,7 +2,6 @@ import sys
 import gym_environments
 import gym
 import numpy as np
-import csv
 from agent import TwoArmedBandit
 
 if __name__ == '__main__':
